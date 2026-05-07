@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sparse Consistency Model — FYP Presentation</title>
+  <meta name="description" content="FYP Project: Accelerating Diffusion Models with Sparse Consistency Models. Visual comparison across model variants." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ===== PAGE HERO TITLE ===== -->
+  <section class="page-hero">
+    <h1 class="page-title">Accelerating Diffusion Models<br>with Sparse Consistency Models</h1>
+    <p class="page-subtitle">Visual quality comparison across model variants</p>
+  </section>
+
+  <!-- ===== CENTERED VIEWER BLOCK ===== -->
+  <div class="viewer-block">
+
+    <!-- 4 MODEL TABS — constrained to same width as image -->
+    <nav class="model-nav">
+      <button class="model-tab active" data-model="0" id="tab-0">
+        <span class="tab-index">01.</span>
+        <span class="tab-name">FLUX.1-Dev<sup>[SDPA]</sup></span>
+      </button>
+      <button class="model-tab" data-model="1" id="tab-1">
+        <span class="tab-index">02.</span>
+        <span class="tab-name">FLUX.1-Dev<sup>[SpargeAttn]</sup></span>
+      </button>
+      <button class="model-tab" data-model="2" id="tab-2">
+        <span class="tab-index">03.</span>
+        <span class="tab-name">FLUX.1-schnell<sup>[SDPA]</sup></span>
+      </button>
+      <button class="model-tab" data-model="3" id="tab-3">
+        <span class="tab-index">04.</span>
+        <span class="tab-name">FLUX.1-schnell<sup>[SpargeAttn]</sup></span>
+      </button>
+    </nav>
+
+    <!-- PERSISTENT INFO BAR — description + k-pills for tab 4 -->
+    <div class="model-info-bar" id="model-info-bar">
+      <p class="model-desc" id="model-desc"></p>
+      <div class="k-pills-wrap" id="k-pills-wrap">
+        <span class="k-label">Top-k</span>
+        <div class="k-pills">
+          <button class="k-pill active" data-k="0">Adaptive</button>
+          <button class="k-pill" data-k="1">k = 0.1</button>
+          <button class="k-pill" data-k="2">k = 0.3</button>
+          <button class="k-pill" data-k="3">k = 0.5</button>
+          <button class="k-pill" data-k="4">k = 0.7</button>
+          <button class="k-pill" data-k="5">k = 0.9</button>
+          <button class="k-pill" data-k="6">k = 1.0</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- MAIN IMAGE -->
+    <div class="main-image-wrap">
+      <img id="main-image" src="" alt="Generated image" />
+      <button class="model-arrow model-arrow-prev" id="model-prev" aria-label="Previous model">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+      </button>
+      <button class="model-arrow model-arrow-next" id="model-next" aria-label="Next model">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+      </button>
+      <!-- Prompt overlay -->
+      <div class="prompt-overlay" id="prompt-overlay">
+        <span class="prompt-label">PROMPT</span>
+        <p class="prompt-text" id="prompt-text"></p>
+      </div>
+    </div>
+
+    <!-- CAROUSEL — drag only, no buttons -->
+    <div class="carousel-track-wrap" id="carousel-track-wrap">
+      <div class="carousel-track" id="carousel-track"></div>
+    </div>
+
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

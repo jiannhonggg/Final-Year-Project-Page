@@ -1,0 +1,436 @@
+/* ===================================
+   RESET & BASE
+=================================== */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --bg: #f8f8f8;
+  --white: #ffffff;
+  --border: #e2e2e2;
+  --border-active: #999999;
+  --text-primary: #111111;
+  --text-muted: #777777;
+  --text-dim: #bbbbbb;
+  --radius: 6px;
+  --max-w: 1100px;
+  /* main content width */
+  --transition: 0.22s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text-primary);
+  font-family: 'Inter', sans-serif;
+  min-height: 100vh;
+}
+
+/* ===================================
+   PAGE HERO — full-width, centered text
+=================================== */
+.page-hero {
+  text-align: center;
+  padding: 64px 24px 40px;
+}
+
+.page-label {
+  font-size: 0.72rem;
+  font-family: 'JetBrains Mono', monospace;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  margin-bottom: 14px;
+}
+
+.page-title {
+  font-size: clamp(1.6rem, 3.5vw, 2.6rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+  color: var(--text-primary);
+  margin-bottom: 14px;
+}
+
+.page-subtitle {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+  max-width: 520px;
+  margin: 0 auto;
+}
+
+/* ===================================
+   VIEWER BLOCK — centered card
+=================================== */
+.viewer-block {
+  max-width: var(--max-w);
+  margin: 0 auto 64px;
+  padding: 0 24px;
+}
+
+/* ===================================
+   MODEL NAV TABS
+   — same width as image, sits on top
+=================================== */
+.model-nav {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  border: 1px solid var(--border);
+  border-bottom: none;
+  border-radius: var(--radius) var(--radius) 0 0;
+  background: var(--white);
+  overflow: hidden;
+}
+
+.model-tab {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 14px 20px;
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  cursor: pointer;
+  color: var(--text-dim);
+  font-family: 'Inter', sans-serif;
+  transition: color var(--transition), border-color var(--transition), background var(--transition);
+}
+
+.model-tab:not(:last-child) {
+  border-right: 1px solid var(--border);
+}
+
+.model-tab .tab-index {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.05em;
+  color: var(--text-dim);
+  transition: color var(--transition);
+  flex-shrink: 0;
+}
+
+.model-tab .tab-name {
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+}
+
+.model-tab .tab-name sup {
+  font-size: 0.68em;
+  font-weight: 500;
+  color: var(--text-dim);
+}
+
+/* active */
+.model-tab.active {
+  color: var(--text-primary);
+  border-bottom-color: var(--text-primary);
+  background: #fafafa;
+}
+
+.model-tab.active .tab-index {
+  color: var(--text-muted);
+}
+
+.model-tab.active .tab-name sup {
+  color: #111111;
+}
+
+.model-tab:hover:not(.active) {
+  color: var(--text-muted);
+  background: #fafafa;
+}
+
+/* ===================================
+   PERSISTENT MODEL INFO BAR
+=================================== */
+.model-info-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 10px 20px;
+  border-left: 1px solid var(--border);
+  border-right: 1px solid var(--border);
+  border-top: 1px solid var(--border);
+  background: var(--white);
+  min-height: 44px;
+}
+
+.model-desc {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+  flex: 1;
+}
+
+.k-pills-wrap {
+  display: none;           /* hidden by default */
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+.k-pills-wrap.visible {
+  display: flex;
+}
+
+.k-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.62rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.k-pills {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.k-pill {
+  padding: 4px 12px;
+  border-radius: 20px;
+  border: 1px solid var(--border);
+  background: none;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: all var(--transition);
+  white-space: nowrap;
+}
+
+.k-pill:hover {
+  border-color: var(--border-active);
+  color: var(--text-primary);
+}
+
+.k-pill.active {
+  background: var(--text-primary);
+  border-color: var(--text-primary);
+  color: #ffffff;
+}
+
+/* ===================================
+   MAIN IMAGE
+=================================== */
+.main-image-wrap {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  background: #ebebeb;
+  border: 1px solid var(--border);
+  border-top: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  /* needed for arrow positioning */
+}
+
+#main-image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+  transition: opacity 0.22s ease;
+}
+
+#main-image.fade-out {
+  opacity: 0;
+}
+
+/* ===================================
+   MODEL SWITCH ARROWS (on image)
+=================================== */
+.model-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 40px;
+  height: 56px;
+  background: rgba(255, 255, 255, 0.45);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 6px;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  color: rgba(0, 0, 0, 0.55);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.2s ease, background 0.2s ease, color 0.2s ease, transform 0.2s ease;
+  z-index: 10;
+}
+
+/* show on image hover */
+.main-image-wrap:hover .model-arrow {
+  opacity: 1;
+}
+
+.model-arrow-prev {
+  left: 12px;
+}
+
+.model-arrow-next {
+  right: 12px;
+}
+
+.model-arrow:hover {
+  background: rgba(255, 255, 255, 0.80);
+  color: rgba(0, 0, 0, 0.85);
+}
+
+.model-arrow:active {
+  transform: translateY(-50%) scale(0.94);
+}
+
+/* ===================================
+   PROMPT OVERLAY
+=================================== */
+.prompt-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 14px 18px 16px;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.72) 0%, rgba(0, 0, 0, 0.45) 60%, transparent 100%);
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  pointer-events: none;
+}
+
+.prompt-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.62rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  color: rgba(255, 255, 255, 0.55);
+  text-transform: uppercase;
+}
+
+.prompt-text {
+  font-size: 0.82rem;
+  font-weight: 400;
+  line-height: 1.45;
+  color: rgba(255, 255, 255, 0.92);
+  max-width: 72ch;
+}
+
+/* ===================================
+   CAROUSEL — drag only
+=================================== */
+.carousel-track-wrap {
+  width: 100%;
+  overflow: hidden;
+  cursor: grab;
+  user-select: none;
+  border-radius: 0 0 var(--radius) var(--radius);
+  background: var(--white);
+  padding: 12px 12px;
+}
+
+.carousel-track-wrap:active {
+  cursor: grabbing;
+}
+
+.carousel-track {
+  display: flex;
+  gap: 8px;
+  will-change: transform;
+  /* No transition during drag — set in JS when needed */
+}
+
+.carousel-thumb {
+  flex-shrink: 0;
+  width: 90px;
+  height: 90px;
+  border-radius: 4px;
+  overflow: hidden;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: border-color var(--transition), transform var(--transition);
+  background: #e8e8e8;
+}
+
+.carousel-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.3s ease;
+  pointer-events: none;
+}
+
+.carousel-thumb:hover img {
+  transform: scale(1.05);
+}
+
+.carousel-thumb:hover {
+  border-color: var(--border-active);
+  transform: translateY(-2px);
+}
+
+.carousel-thumb.active {
+  border-color: var(--text-primary);
+  transform: translateY(-2px);
+}
+
+/* ===================================
+   SCROLLBAR
+=================================== */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f0f0f0;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #ccc;
+  border-radius: 3px;
+}
+
+/* ===================================
+   RESPONSIVE
+=================================== */
+@media (max-width: 640px) {
+  .page-hero {
+    padding: 40px 20px 28px;
+  }
+
+  .viewer-block {
+    padding: 0 14px;
+  }
+
+  .model-tab {
+    padding: 12px 10px;
+  }
+
+  .model-tab .tab-name sup {
+    display: none;
+  }
+
+  .carousel-thumb {
+    width: 72px;
+    height: 72px;
+  }
+}
